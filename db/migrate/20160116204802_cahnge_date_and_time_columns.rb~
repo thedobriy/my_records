@@ -1,0 +1,4 @@
+class CahngeDateAndTimeColumns < ActiveRecord::Migration
+  def change
+  end
+end

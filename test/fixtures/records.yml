@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  datetime: MyString
+  summa: 1
+  desc: MyString
+  data: MyString
+  time: MyString
+  label: MyString
+  status: 1
+
+two:
+  datetime: MyString
+  summa: 1
+  desc: MyString
+  data: MyString
+  time: MyString
+  label: MyString
+  status: 1

@@ -1,0 +1,147 @@
+<h3>Import</h3>
+<%= form_tag import_records_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload file" %>
+<% end %>
+
+<h1>Listing records</h1>
+<%= select_month(Date.today) %>
+<%= select_year(Date.today, :start_year => 2014, :end_year => Date.today.year) %>
+<p>
+
+<p>
+<%= column_chart @profit_by_month %>
+<p>
+<%= line_chart [
+  {name: "Kino", data: Record.where(label: "K").group_by_week(:datetime)},
+  {name: "Par 13", data: Record.where(label: "B").group_by_week(:datetime)}, 
+  {name: "Bun", data: Record.where(label: "P").group_by_week(:datetime)} ] %>
+<p>
+<table border="1">
+  <thead>
+    <tr>
+      <th>№</th>
+      <% @rec_kino_by_month.each do |m| %>
+        <th><%= m[0].to_time.strftime("%b %Y") %></th>
+      <% end %> 
+    </tr>
+  </thead>
+    <tbody>
+      <tr>
+        <td>Kino</td>
+        <% @rec_kino_by_month.each do |m| %>
+          <td><%= m[1] %></td>
+        <% end %> 
+      </tr>
+      <tr>
+        <td>Bunker</td>
+        <% @rec_bunker_by_month.each do |m| %>
+          <td><%= m[1] %></td>
+        <% end %> 
+      </tr>
+      <tr>
+        <td>Par13</td>
+        <% @rec_par13_by_month.each do |m| %>
+          <td><%= m[1] %></td>
+        <% end %> 
+      </tr>
+   </tbody>
+</table>       
+<p>
+<table border="1">
+  <thead>
+    <tr>
+      <th>№</th>
+      <% @profit_by_month.each do |m| %>
+        <th><%= m[0].to_time.strftime("%b %Y") %></th>
+      <% end %> 
+    </tr>
+  </thead>
+    <tbody>
+      <tr>
+        <td>Profit</td>
+        <% @profit_by_month.each do |m| %>
+          <td><%= m[1] %></td>
+        <% end %> 
+      </tr>
+      <tr>
+        <td>Costs</td>
+        <% @costs_by_month.each do |m| %>
+          <td><%= m[1] %></td>
+        <% end %> 
+      </tr>
+   </tbody>
+</table>
+
+<p>
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Показатель</th>
+      <th>Значение</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td></td>
+        <td>Kino</td>
+        <td><%= @rec_kino_total %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Bun</td>
+        <td><%= @rec_bunker_total %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Par</td>
+        <td><%= @rec_par13_total %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Total</td>
+        <td><%= @rec_total_games %></td>
+      </tr>
+  </tbody>
+</table>
+<p>
+<table>
+  <thead>
+    <tr>
+      <th>Datetime</th>
+      <th>Summa</th>
+      <th>Desc</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Label</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @records.each do |record| %>
+      <tr>
+        <td><%= record.datetime %></td>
+        <td><%= record.summa %></td>
+        <td><%= record.desc %></td>
+        <td><%= record.date %></td>
+        <td><%= record.time %></td>
+        <td><%= record.label %></td>
+        <td><%= record.status %></td>
+        <td><%= link_to 'Show', record %></td>
+        <td><%= link_to 'Edit', edit_record_path(record) %></td>
+        <td><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'New Record', new_record_path %>

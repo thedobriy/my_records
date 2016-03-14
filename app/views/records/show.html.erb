@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Datetime:</strong>
+  <%= @record.datetime %>
+</p>
+
+<p>
+  <strong>Summa:</strong>
+  <%= @record.summa %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @record.desc %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @record.data %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @record.time %>
+</p>
+
+<p>
+  <strong>Label:</strong>
+  <%= @record.label %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @record.status %>
+</p>
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Back', records_path %>
